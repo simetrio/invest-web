@@ -26,8 +26,23 @@
 <div class="container-fluid" id="root">
     <h1>Invest online</h1>
 
-    <p>{{ message }}</p>
-    <button v-on:click="reverseMessage">Перевернуть сообщение</button>
+    <div class="row">
+        <div class="col-3">
+            <input v-model="message" />
+        </div>
+        <div class="col-9">
+            <button v-on:click="reverseMessage">Найти</button>
+        </div>
+    </div>
+    
+    <div>
+        <table>
+            <tr v-for="item in result">
+                <td>{{ item.name }}</td>
+            </tr>
+        </table>
+    </div>
+    
 </div>
 
 <script src="app.js"></script>
