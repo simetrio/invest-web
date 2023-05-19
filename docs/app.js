@@ -1,15 +1,14 @@
 const EventHandling = {
     data() {
         return {
-            message: "Привет, Vue.js!"
+            message: "",
+            result: [],
         }
     },
     methods: {
         reverseMessage() {
-            this.message = this.message
-                .split("")
-                .reverse()
-                .join("")
+            this.result = [{name:"one"}, {name:"two"}, {name:"three"}, {name:"four"}]
+                .filter(x => x.name.indexOf(this.message) !== -1);
         }
     }
 }
