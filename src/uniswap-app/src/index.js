@@ -16,7 +16,7 @@ window.uniswapAppMain = async function () {
 
         await Promise.all([loadBalance(config), loadPosition(config)])
 
-        setStatus(new Date())
+        setStatus(new Date().toLocaleString())
     } catch {
         setStatus("Ошибка!!!")
     }
