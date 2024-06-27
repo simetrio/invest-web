@@ -27,6 +27,10 @@ window.uniswapAppMain = async function() {
     console.log("Balance", "USDC", usdcBalance)
     console.log("Balance", "WETH", wethBalance)
     console.log("Balance", "ETH", ethBalance)
+
+    document.getElementById("usdc").innerText = `${usdcBalance} $`
+    document.getElementById("weth").innerText = wethBalance
+    document.getElementById("eth").innerText = ethBalance
 }
 
 window.uniswapAppMain()
