@@ -4,9 +4,14 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
+    "build": "webpack --config webpack.config.js --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4"
+  }
 }
