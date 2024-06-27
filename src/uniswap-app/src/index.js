@@ -62,7 +62,10 @@ async function loadBalance(config) {
 }
 
 async function loadPosition(config) {
-    const position = await uniswap.getLastPosition(config)
+    const [position, priceCurrent] = await Promise.all([
+        uniswap.getLastPosition(config),
+        uniswap.getPrice(config)
+    ])
     console.log("Position", position, position.liquidity.toString())
 
     document.getElementById("position-number").innerText = position.id
@@ -73,7 +76,15 @@ async function loadPosition(config) {
         return
     }
 
-    document.getElementById("position-status").innerText = "Открыта"
+    const priceUpper = uniswap.getPriceFromTick(config, position.tickUpper)
+    const priceLower = uniswap.getPriceFromTick(config, position.tickLower)
+
+    const isInRange = priceCurrent > priceLower && priceCurrent < priceUpper
+
+    document.getElementById("position-status").innerText = isInRange ? "Открыта" : "Закрыта"
+    document.getElementById("position-price-current").innerText = `${priceCurrent} $`
+    document.getElementById("position-price-upper").innerText = `${priceUpper} $`
+    document.getElementById("position-price-lower").innerText = `${priceLower} $`
 }
 
 window.uniswapAppMain()
