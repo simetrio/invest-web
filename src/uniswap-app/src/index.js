@@ -38,22 +38,26 @@ function getConfig() {
             address: walletAddress,
         },
         provider: new ethers.providers.JsonRpcProvider("https://arb1.arbitrum.io/rpc"),
+        coin0: coins.Arbitrum_WETH,
+        coin1: coins.Arbitrum_USDC,
     }
 }
 
 async function loadBalance(config) {
-    const [usdcBalance, wethBalance, ethBalance] = await Promise.all([
-        uniswap.getBalance(config, coins.Arbitrum_USDC),
-        uniswap.getBalance(config, coins.Arbitrum_WETH),
+    const [coin0Balance, coin1Balance, ethBalance] = await Promise.all([
+        uniswap.getBalance(config, config.coin0),
+        uniswap.getBalance(config, config.coin1),
         uniswap.getEthBalance(config),
     ])
 
-    console.log("Balance", "USDC", usdcBalance)
-    console.log("Balance", "WETH", wethBalance)
+    console.log("Balance", config.coin0.name, coin0Balance)
+    console.log("Balance", config.coin1.name, coin1Balance)
     console.log("Balance", "ETH", ethBalance)
 
-    document.getElementById("usdc").innerText = `${usdcBalance} $`
-    document.getElementById("weth").innerText = wethBalance
+    document.getElementById("coin0-name").innerText = config.coin0.name
+    document.getElementById("coin0").innerText = coin0Balance
+    document.getElementById("coin1-name").innerText = config.coin1.name
+    document.getElementById("coin1").innerText = coin1Balance
     document.getElementById("eth").innerText = ethBalance
 }
 
