@@ -3,23 +3,42 @@ const { uniswap } = require("./libs/uniswap")
 const { coins } = require("./libs/coins")
 
 window.uniswapAppMain = async function () {
+    try {
+        const config = getConfig()
+        if (!config) {
+            console.log("Укажите адрес кошелька")
+            throw new Error("Укажите адрес кошелька")
+        }
+
+        console.log(config.wallet.address)
+        setStatus("Загрузка...")
+
+        await Promise.all([loadBalance(config), loadPosition(config)])
+
+        setStatus("Обновить")
+    } catch {
+        setStatus("Ошибка!!!")
+    }
+}
+
+function setStatus(status) {
+    document.getElementById("refresh").innerText = status
+}
+
+function getConfig() {
     if (!location.hash) {
-        console.log("Укажите адрес кошелька")
         return
     }
 
     const walletAddress = location.hash.replace("#", "")
-    console.log(walletAddress)
 
-    const config = {
+    return {
         NONFUNGIBLE_POSITION_MANAGER_CONTRACT_ADDRESS: "0xC36442b4a4522E871399CD717aBDD847Ab11FE88",
         wallet: {
             address: walletAddress,
         },
         provider: new ethers.providers.JsonRpcProvider("https://arb1.arbitrum.io/rpc"),
     }
-
-    await Promise.all([loadBalance(config), loadPosition(config)])
 }
 
 async function loadBalance(config) {
