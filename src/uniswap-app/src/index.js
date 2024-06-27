@@ -3,6 +3,11 @@ const { uniswap } = require("./libs/uniswap")
 const { coins } = require("./libs/coins")
 
 async function uniswapAppMain() {
+    if (!location.hash) {
+        console.log("Укажите адрес кошелька")
+        return
+    }
+
     const walletAddress = location.hash.replace("#", "")
     console.log(walletAddress)
 
