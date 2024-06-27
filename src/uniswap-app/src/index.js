@@ -1,6 +1,7 @@
 const { ethers } = require("ethers")
 const { uniswap } = require("./libs/uniswap")
 const { coins } = require("./libs/coins")
+const { html } = require("./libs/html")
 
 window.uniswapAppMain = async function () {
     try {
@@ -80,11 +81,20 @@ async function loadPosition(config) {
     const priceLower = uniswap.getPriceFromTick(config, position.tickLower)
 
     const isInRange = priceCurrent > priceLower && priceCurrent < priceUpper
+    const isUpper = !isInRange && priceCurrent > priceUpper
 
-    document.getElementById("position-status").innerText = isInRange ? "Открыта" : "Закрыта"
-    document.getElementById("position-price-current").innerText = `${priceCurrent} $`
-    document.getElementById("position-price-upper").innerText = `${priceUpper} $`
-    document.getElementById("position-price-lower").innerText = `${priceLower} $`
+    document.getElementById("position-status").innerHTML = isInRange ? html.textGreen("Открыта") : html.textRed("Закрыта")
+
+    let priceHtml = ""
+    if (isInRange) {
+        priceHtml = `${html.textGray(html.price(priceLower))} &mdash; ${html.textGreen(html.price(priceCurrent))} &mdash; ${html.textGray(html.price(priceUpper))}`
+    } else if(isUpper) {
+        priceHtml = `${html.textGray(html.price(priceLower))} &mdash; ${html.textGray(html.price(priceUpper))} &mdash; ${html.textRed(html.price(priceCurrent))}`
+    } else {
+        priceHtml = `${html.textRed(html.price(priceCurrent))} &mdash; ${html.textGray(html.price(priceLower))} &mdash; ${html.textGray(html.price(priceUpper))}`
+    }
+
+    document.getElementById("position-price").innerHTML = priceHtml
 }
 
 window.uniswapAppMain()
