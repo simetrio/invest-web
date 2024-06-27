@@ -16,14 +16,14 @@ window.uniswapAppMain = async function () {
 
         await Promise.all([loadBalance(config), loadPosition(config)])
 
-        setStatus("Обновить")
+        setStatus(new Date())
     } catch {
         setStatus("Ошибка!!!")
     }
 }
 
 function setStatus(status) {
-    document.getElementById("refresh").innerText = status
+    document.getElementById("refresh-status").innerText = status
 }
 
 function getConfig() {
