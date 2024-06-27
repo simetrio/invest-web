@@ -65,7 +65,7 @@ async function loadBalance(config) {
 async function loadPosition(config) {
     const [position, priceCurrent] = await Promise.all([
         uniswap.getLastPosition(config),
-        uniswap.getPrice(config)
+        uniswap.getPrice(config),
     ])
     console.log("Position", position, position.liquidity.toString())
 
@@ -82,6 +82,8 @@ async function loadPosition(config) {
 
     const isInRange = priceCurrent > priceLower && priceCurrent < priceUpper
     const isUpper = !isInRange && priceCurrent > priceUpper
+
+    // View
 
     document.getElementById("position-status").innerHTML = isInRange ? html.textGreen("Открыта") : html.textRed("Закрыта")
 
