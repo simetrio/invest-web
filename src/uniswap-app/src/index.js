@@ -2,7 +2,7 @@ const { ethers } = require("ethers")
 const { uniswap } = require("./libs/uniswap")
 const { coins } = require("./libs/coins")
 
-async function uniswapAppMain() {
+window.uniswapAppMain = async function() {
     if (!location.hash) {
         console.log("Укажите адрес кошелька")
         return
@@ -29,4 +29,4 @@ async function uniswapAppMain() {
     console.log("Balance", "ETH", ethBalance)
 }
 
-uniswapAppMain()
+window.uniswapAppMain()
