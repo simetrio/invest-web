@@ -70,10 +70,10 @@ function showBalance(config, data) {
     console.log("Balance", "ETH", data.ethBalance)
 
     document.getElementById("coin0-name").innerText = config.coin0.name
-    document.getElementById("coin0").innerText = data.coin0Balance
+    document.getElementById("coin0").innerText = config.coin0.round(data.coin0Balance)
     document.getElementById("coin1-name").innerText = config.coin1.name
-    document.getElementById("coin1").innerText = data.coin1Balance
-    document.getElementById("eth").innerText = data.ethBalance
+    document.getElementById("coin1").innerText = config.coin1.round(data.coin1Balance)
+    document.getElementById("eth").innerText = coins.WETH.round(data.ethBalance)
 }
 
 function showPosition(config, data) {
@@ -99,11 +99,11 @@ function showPosition(config, data) {
 
     let priceHtml = ""
     if (isInRange) {
-        priceHtml = `${html.textGray(html.price(priceLower))} &mdash; ${html.textGreen(html.price(data.priceCurrent))} &mdash; ${html.textGray(html.price(priceUpper))}`
+        priceHtml = `${html.textGray(priceLower)} &mdash; ${html.textGreen(data.priceCurrent)} &mdash; ${html.textGray(priceUpper)}`
     } else if (isUpper) {
-        priceHtml = `${html.textGray(html.price(priceLower))} &mdash; ${html.textGray(html.price(priceUpper))} &mdash; ${html.textRed(html.price(data.priceCurrent))}`
+        priceHtml = `${html.textGray(priceLower)} &mdash; ${html.textGray(priceUpper)} &mdash; ${html.textRed(data.priceCurrent)}`
     } else {
-        priceHtml = `${html.textRed(html.price(data.priceCurrent))} &mdash; ${html.textGray(html.price(priceLower))} &mdash; ${html.textGray(html.price(priceUpper))}`
+        priceHtml = `${html.textRed(data.priceCurrent)} &mdash; ${html.textGray(priceLower)} &mdash; ${html.textGray(priceUpper)}`
     }
 
     document.getElementById("position-price").innerHTML = priceHtml
