@@ -16,48 +16,83 @@
 
 <body>
 
-    <div class="container-fluid m-3" id="root">
-        <h1>Uniswap App</h1>
+    <div class="container-fluid my-3 px-3" id="root">
+        <div class="row">
+            <div class="col-lg-5">
+                <h1>Uniswap App</h1>
 
-        <div class="row my-3">
-            <div class="col-lg-1 col-4">
-                <button class="btn btn-primary" onclick="uniswapAppMain()">Обновить</button>
+                <div class="row my-3">
+                    <div class="col-lg-3 col-4">
+                        <button class="btn btn-primary" onclick="uniswapAppMain()">Обновить</button>
+                    </div>
+                    <div id="refresh-status" class="col-lg-9 col-8 pt-2"></div>
+                </div>
+
+                <h3>Баланс</h3>
+
+                <div class="row my-3">
+                    <div id="coin0-name" class="col-lg-3 col-3">Монета 0</div>
+                    <div id="coin0" class="col-lg-9 col-9"></div>
+
+                    <div id="coin1-name" class="col-lg-3 col-3">Монета 1</div>
+                    <div id="coin1" class="col-lg-9 col-9"></div>
+
+                    <div class="col-lg-3 col-3">ETH</div>
+                    <div id="eth" class="col-lg-9 col-9"></div>
+                </div>
+
+                <h3>Позиция</h3>
+
+                <div class="row my-3">
+                    <div class="col-lg-3 col-3">Номер</div>
+                    <div id="position-number" class="col-lg-9 col-9"></div>
+
+                    <div class="col-lg-3 col-3">Статус</div>
+                    <div id="position-status" class="col-lg-9 col-9"></div>
+
+                    <div class="col-lg-3 col-3">Проценты</div>
+                    <div id="position-fee" class="col-lg-9 col-9"></div>
+
+                    <div class="col-lg-3">Цена</div>
+                    <div id="position-price" class="col-lg-9"></div>
+                </div>
             </div>
-            <div id="refresh-status" class="col-lg-11 col-8 pt-2"></div>
+
+            <div class="col-lg-7">
+                <h3 class="h1">График</h3>
+
+                <div class="my-3">
+                    <!-- TradingView Widget BEGIN -->
+                    <div class="tradingview-widget-container" style="width: 800px; height: 600px;">
+                        <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%">
+                        </div>
+                        <div class="tradingview-widget-copyright"><a href="https://ru.tradingview.com/"
+                                rel="noopener nofollow" target="_blank"><span class="blue-text">Все рынки на
+                                    TradingView</span></a></div>
+                        <script type="text/javascript"
+                            src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                                {
+                                    "width": "800",
+                                    "height": "600",
+                                    "symbol": "UNISWAP3ARBITRUM:WETHUSDC_C69620.USD",
+                                    "interval": "60",
+                                    "timezone": "Asia/Almaty",
+                                    "theme": "dark",
+                                    "style": "1",
+                                    "locale": "ru",
+                                    "allow_symbol_change": false,
+                                    "calendar": false,
+                                    "support_host": "https://www.tradingview.com"
+                                }
+                            </script>
+                    </div>
+                    <!-- TradingView Widget END -->
+                </div>
+            </div>
         </div>
-
-        <h3>Баланс</h3>
-
-        <div class="row my-3">
-            <div id="coin0-name" class="col-lg-1 col-3">Монета 0</div>
-            <div id="coin0" class="col-lg-11 col-9"></div>
-
-            <div id="coin1-name" class="col-lg-1 col-3">Монета 1</div>
-            <div id="coin1" class="col-lg-11 col-9"></div>
-
-            <div class="col-lg-1 col-3">ETH</div>
-            <div id="eth" class="col-lg-11 col-9"></div>
-        </div>
-
-        <h3>Позиция</h3>
-
-        <div class="row my-3">
-            <div class="col-lg-1 col-3">Номер</div>
-            <div id="position-number" class="col-lg-11 col-9"></div>
-
-            <div class="col-lg-1 col-3">Статус</div>
-            <div id="position-status" class="col-lg-11 col-9"></div>
-
-            <div class="col-lg-1 col-3">Проценты</div>
-            <div id="position-fee" class="col-lg-11 col-9"></div>
-
-            <div class="col-lg-1">Цена</div>
-            <div id="position-price" class="col-lg-11"></div>
-        </div>
-
     </div>
 
-    <script src="uniswap.js?v=10"></script>
+    <script src="uniswap.js?v=11"></script>
 
 </body>
 
